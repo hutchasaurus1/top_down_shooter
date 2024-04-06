@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5l0xrvwsibl5"]
+
+[ext_resource type="PackedScene" uid="uid://xbywtlfor1tw" path="res://items/item.tscn" id="1_rtcen"]
+[ext_resource type="Texture2D" uid="uid://b6uw5ji7glo67" path="res://assets/item_orbs/Orb_13.png" id="2_1p3s0"]
+[ext_resource type="Script" path="res://items/damage_wave_item.gd" id="2_53mvx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3selj"]
+radius = 6.08276
+
+[node name="DamageWaveItem" instance=ExtResource("1_rtcen")]
+script = ExtResource("2_53mvx")
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(-4.76837e-07, -4.76837e-07)
+scale = Vector2(0.104, 0.1)
+texture = ExtResource("2_1p3s0")
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="1"]
+position = Vector2(4.76837e-07, 0.500001)
+scale = Vector2(0.6, 0.65)
+
+[node name="HurtboxComponent" parent="." index="5"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
+shape = SubResource("CircleShape2D_3selj")

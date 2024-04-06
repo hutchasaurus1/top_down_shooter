@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://p3qmpabi80w0"]
+
+[ext_resource type="Script" path="res://items/item_duration_bar.gd" id="1_a4sv7"]
+[ext_resource type="Texture2D" uid="uid://dvnvrvmlgyvwh" path="res://assets/progress_circle_background.png" id="1_dawy3"]
+[ext_resource type="Texture2D" uid="uid://b08c7s0lh201" path="res://assets/progress_circle_outline.png" id="2_u8ydj"]
+[ext_resource type="Texture2D" uid="uid://d1r5hufo3wr5b" path="res://assets/progress_circle_color.png" id="3_v3i1x"]
+
+[node name="ItemDurationBar" type="TextureProgressBar"]
+offset_right = 45.0
+offset_bottom = 45.0
+scale = Vector2(0.153191, 0.107477)
+value = 50.0
+fill_mode = 4
+texture_under = ExtResource("1_dawy3")
+texture_over = ExtResource("2_u8ydj")
+texture_progress = ExtResource("3_v3i1x")
+script = ExtResource("1_a4sv7")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true

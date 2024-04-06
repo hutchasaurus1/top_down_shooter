@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://xbywtlfor1tw"]
+
+[ext_resource type="Script" path="res://items/item.gd" id="1_ejgjh"]
+[ext_resource type="Script" path="res://components/move_component.gd" id="1_xw5o6"]
+[ext_resource type="Script" path="res://components/flash_component.gd" id="2_0tqw4"]
+[ext_resource type="Script" path="res://components/scale_component.gd" id="3_mjmwy"]
+[ext_resource type="Script" path="res://components/hurtbox_component.gd" id="4_xj5dd"]
+
+[node name="Item" type="Node2D"]
+script = ExtResource("1_ejgjh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("1_xw5o6")
+actor = NodePath("..")
+velocity = Vector2(0, 35)
+
+[node name="FlashComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("2_0tqw4")
+sprite = NodePath("..")
+
+[node name="ScaleComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("3_mjmwy")
+sprite = NodePath("..")
+
+[node name="HurtboxComponent" type="Area2D" parent="."]
+script = ExtResource("4_xj5dd")

@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://bjy7n5wu5kw48"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_0ybxb"]
+[ext_resource type="PackedScene" uid="uid://bmlu4ayohcdu4" path="res://player/player_ship.tscn" id="1_170xr"]
+[ext_resource type="PackedScene" uid="uid://c1w1v3hu7q3du" path="res://effects/space_background.tscn" id="2_itkdm"]
+[ext_resource type="Resource" uid="uid://be2pbdn2t2x8d" path="res://resources/game_stats.tres" id="2_qwlke"]
+[ext_resource type="PackedScene" uid="uid://7sob0sb8tham" path="res://enemy/enemy_generator.tscn" id="4_nofyr"]
+[ext_resource type="LabelSettings" uid="uid://lnv5oxkg8psa" path="res://fonts/default_font.tres" id="6_866gw"]
+[ext_resource type="Script" path="res://PowerupTimers.gd" id="8_bssha"]
+[ext_resource type="PackedScene" uid="uid://baapeeo3m1tir" path="res://enemy/boss_health.tscn" id="8_jvpst"]
+
+[node name="world" type="Node2D"]
+script = ExtResource("1_0ybxb")
+game_stats = ExtResource("2_qwlke")
+
+[node name="playerShip" parent="." instance=ExtResource("1_170xr")]
+position = Vector2(80, 220)
+
+[node name="SpaceBackground" parent="." instance=ExtResource("2_itkdm")]
+
+[node name="EnemyGenerator" parent="." instance=ExtResource("4_nofyr")]
+
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 160.0
+offset_bottom = 33.0
+
+[node name="Score" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Score:"
+label_settings = ExtResource("6_866gw")
+horizontal_alignment = 1
+
+[node name="BossHealth" parent="HBoxContainer" groups=["health"] instance=ExtResource("8_jvpst")]
+visible = false
+layout_mode = 2
+
+[node name="PowerupTimers" type="HBoxContainer" parent="."]
+offset_left = 3.0
+offset_top = 226.0
+offset_right = 106.0
+offset_bottom = 271.0
+scale = Vector2(0.257285, 0.204093)
+size_flags_vertical = 3
+theme_override_constants/separation = 13
+script = ExtResource("8_bssha")
+
+[connection signal="tree_exiting" from="playerShip" to="." method="_on_player_ship_tree_exiting"]

@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://2j8d3smei0f2"]
+
+[ext_resource type="PackedScene" uid="uid://xbywtlfor1tw" path="res://items/item.tscn" id="1_vv7po"]
+[ext_resource type="Resource" uid="uid://be2pbdn2t2x8d" path="res://resources/game_stats.tres" id="2_f1x7k"]
+[ext_resource type="Texture2D" uid="uid://dewd1bcey3lnl" path="res://assets/item_orbs/Orb_09.png" id="2_vgji8"]
+[ext_resource type="Script" path="res://items/fire_rate_item.gd" id="2_y2u45"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4u8lq"]
+radius = 6.0
+
+[node name="FireRateItem" instance=ExtResource("1_vv7po")]
+script = ExtResource("2_y2u45")
+game_stats = ExtResource("2_f1x7k")
+duration = 10.0
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.1, 0.101)
+texture = ExtResource("2_vgji8")
+
+[node name="FlashComponent" parent="." index="3"]
+flash_duration = 0.5
+
+[node name="ScaleComponent" parent="." index="4"]
+scale_amount = Vector2(2, 2)
+
+[node name="HurtboxComponent" parent="." index="5"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
+shape = SubResource("CircleShape2D_4u8lq")

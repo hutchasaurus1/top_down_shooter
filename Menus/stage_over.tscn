@@ -1,0 +1,81 @@
+[gd_scene load_steps=6 format=3 uid="uid://cfqkmvclikh6y"]
+
+[ext_resource type="Script" path="res://Menus/stage_over.gd" id="1_uyifk"]
+[ext_resource type="PackedScene" uid="uid://c1w1v3hu7q3du" path="res://effects/space_background.tscn" id="2_1shc3"]
+[ext_resource type="Resource" uid="uid://be2pbdn2t2x8d" path="res://resources/game_stats.tres" id="2_mqb65"]
+[ext_resource type="LabelSettings" uid="uid://dd71jck2gj8s4" path="res://fonts/title_settings.tres" id="3_apa6c"]
+[ext_resource type="LabelSettings" uid="uid://lnv5oxkg8psa" path="res://fonts/default_font.tres" id="4_wr8sr"]
+
+[node name="StageOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uyifk")
+game_stats = ExtResource("2_mqb65")
+
+[node name="SpaceBackground" parent="." instance=ExtResource("2_1shc3")]
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="GameOver" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Space Raccoon
+Defeated!"
+label_settings = ExtResource("3_apa6c")
+horizontal_alignment = 1
+
+[node name="ScoreContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScoreLabel" type="Label" parent="CenterContainer/VBoxContainer/ScoreContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Score:"
+label_settings = ExtResource("4_wr8sr")
+
+[node name="ScoreValue" type="Label" parent="CenterContainer/VBoxContainer/ScoreContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("4_wr8sr")
+horizontal_alignment = 2
+
+[node name="HighScoreContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HighScoreLabel" type="Label" parent="CenterContainer/VBoxContainer/HighScoreContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "High Score:"
+label_settings = ExtResource("4_wr8sr")
+
+[node name="HighScoreValue" type="Label" parent="CenterContainer/VBoxContainer/HighScoreContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("4_wr8sr")
+horizontal_alignment = 2
+
+[node name="Space" type="Control" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Press 'space' to play again"
+label_settings = ExtResource("4_wr8sr")
+horizontal_alignment = 1

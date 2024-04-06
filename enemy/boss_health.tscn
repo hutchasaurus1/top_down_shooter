@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://baapeeo3m1tir"]
+
+[ext_resource type="LabelSettings" uid="uid://dd71jck2gj8s4" path="res://fonts/title_settings.tres" id="1_i3cme"]
+
+[sub_resource type="Theme" id="Theme_6nqr6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ok8qs"]
+bg_color = Color(0.00392157, 0.00392157, 0.00392157, 0.301961)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6yphq"]
+bg_color = Color(0.988235, 0.0352941, 0.0666667, 0.882353)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="BossHealth" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -212.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BossHealthProgress" type="ProgressBar" parent="." groups=["health"]]
+layout_mode = 0
+offset_left = 4.0
+offset_right = 304.0
+offset_bottom = 27.0
+scale = Vector2(0.5, 0.5)
+theme = SubResource("Theme_6nqr6")
+theme_override_styles/background = SubResource("StyleBoxFlat_ok8qs")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6yphq")
+value = 55.0
+show_percentage = false
+
+[node name="BossName" type="Label" parent="BossHealthProgress" groups=["health"]]
+layout_mode = 0
+offset_left = -8.0
+offset_right = 310.0
+offset_bottom = 26.0
+text = "Space"
+label_settings = ExtResource("1_i3cme")
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,222 @@
+[gd_scene load_steps=34 format=3 uid="uid://bmlu4ayohcdu4"]
+
+[ext_resource type="Script" path="res://player/player_ship.gd" id="1_k0ouj"]
+[ext_resource type="Texture2D" uid="uid://btc1hat8jwow3" path="res://assets/ship.png" id="1_xm5ct"]
+[ext_resource type="Resource" uid="uid://be2pbdn2t2x8d" path="res://resources/game_stats.tres" id="2_o8dxf"]
+[ext_resource type="Script" path="res://components/move_component.gd" id="2_o3704"]
+[ext_resource type="Texture2D" uid="uid://ba70u37d3lrx0" path="res://assets/ship_flame.png" id="2_orjnd"]
+[ext_resource type="Script" path="res://components/move_input_component.gd" id="3_02lod"]
+[ext_resource type="Resource" uid="uid://b063mobjy0q4" path="res://player/ship_move_stats.tres" id="4_irnrl"]
+[ext_resource type="Script" path="res://components/position_clamp_component.gd" id="5_qkur0"]
+[ext_resource type="Script" path="res://components/spawner_component.gd" id="6_ui384"]
+[ext_resource type="PackedScene" uid="uid://dpsn05jtbkfig" path="res://projectiles/laser.tscn" id="8_fycic"]
+[ext_resource type="Script" path="res://components/scale_component.gd" id="9_hjhuk"]
+[ext_resource type="Script" path="res://components/stats_component.gd" id="11_nluc6"]
+[ext_resource type="Script" path="res://components/destroyed_component.gd" id="12_fsnpg"]
+[ext_resource type="Script" path="res://components/hurtbox_component.gd" id="13_tsmob"]
+[ext_resource type="PackedScene" uid="uid://b5esdvuagf6qf" path="res://effects/explosion_effect.tscn" id="14_teg88"]
+[ext_resource type="Script" path="res://components/hurt_component.gd" id="15_ryb0w"]
+[ext_resource type="AudioStream" uid="uid://cfw2vioq7rq3i" path="res://sounds/laser_sound.wav" id="16_61waj"]
+[ext_resource type="Script" path="res://components/variable_pitch_audio_stream_player.gd" id="16_nuce8"]
+[ext_resource type="Script" path="res://components/hitbox_component.gd" id="18_s7jr7"]
+[ext_resource type="PackedScene" uid="uid://cewlgqho8a4jd" path="res://items/damage_wave.tscn" id="20_ysond"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pdxox"]
+atlas = ExtResource("1_xm5ct")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tgsl7"]
+atlas = ExtResource("1_xm5ct")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25spd"]
+atlas = ExtResource("1_xm5ct")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1w2ev"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pdxox")
+}],
+"loop": true,
+"name": &"bank_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tgsl7")
+}],
+"loop": true,
+"name": &"bank_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25spd")
+}],
+"loop": true,
+"name": &"center",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ehdn"]
+atlas = ExtResource("2_orjnd")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04688"]
+atlas = ExtResource("2_orjnd")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3eyex"]
+atlas = ExtResource("2_orjnd")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l038l"]
+atlas = ExtResource("2_orjnd")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1f1r1"]
+atlas = ExtResource("2_orjnd")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0bfd"]
+atlas = ExtResource("2_orjnd")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x36rk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ehdn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_04688")
+}],
+"loop": true,
+"name": &"bank_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3eyex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l038l")
+}],
+"loop": true,
+"name": &"bank_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1f1r1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s0bfd")
+}],
+"loop": true,
+"name": &"center",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h6hof"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xtfaa"]
+radius = 8.06226
+
+[node name="playerShip" type="Node2D"]
+script = ExtResource("1_k0ouj")
+game_stats = ExtResource("2_o8dxf")
+
+[node name="Anchor" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Anchor"]
+sprite_frames = SubResource("SpriteFrames_1w2ev")
+animation = &"center"
+
+[node name="Thrusters" type="AnimatedSprite2D" parent="Anchor"]
+position = Vector2(0, 16)
+sprite_frames = SubResource("SpriteFrames_x36rk")
+animation = &"center"
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("2_o3704")
+actor = NodePath("..")
+
+[node name="MoveInputComponent" type="Node" parent="." node_paths=PackedStringArray("move_component")]
+script = ExtResource("3_02lod")
+move_component = NodePath("../MoveComponent")
+move_stats = ExtResource("4_irnrl")
+
+[node name="PositionClampComponent" type="Node2D" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("5_qkur0")
+actor = NodePath("..")
+
+[node name="LeftMuzzle" type="Marker2D" parent="."]
+position = Vector2(-5, -4)
+
+[node name="RightMuzzle" type="Marker2D" parent="."]
+position = Vector2(5, -4)
+
+[node name="FireRateTimer" type="Timer" parent="."]
+wait_time = 0.4
+autostart = true
+
+[node name="SpawnerComponent" type="Node2D" parent="."]
+script = ExtResource("6_ui384")
+scene = ExtResource("8_fycic")
+
+[node name="ScaleComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("9_hjhuk")
+sprite = NodePath("../Anchor")
+
+[node name="StatsComponent" type="Node" parent="."]
+script = ExtResource("11_nluc6")
+
+[node name="DestroyedComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "stats_component", "destroy_effect_spawner_component")]
+script = ExtResource("12_fsnpg")
+actor = NodePath("..")
+stats_component = NodePath("../StatsComponent")
+destroy_effect_spawner_component = NodePath("../ExplosionSpawner")
+
+[node name="HurtboxComponent" type="Area2D" parent="."]
+collision_mask = 0
+script = ExtResource("13_tsmob")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_h6hof")
+
+[node name="ExplosionSpawner" type="Node2D" parent="."]
+script = ExtResource("6_ui384")
+scene = ExtResource("14_teg88")
+
+[node name="HurtComponent" type="Node" parent="." node_paths=PackedStringArray("stats_component", "hurtbox_component")]
+script = ExtResource("15_ryb0w")
+stats_component = NodePath("../StatsComponent")
+hurtbox_component = NodePath("../HurtboxComponent")
+
+[node name="VariablePitchAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_61waj")
+volume_db = 0.5
+bus = &"Sound Effects"
+script = ExtResource("16_nuce8")
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_mask = 4
+script = ExtResource("18_s7jr7")
+
+[node name="ItemPickup" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_xtfaa")
+debug_color = Color(0.768627, 0.290196, 0.843137, 0.419608)
+
+[node name="DamageWaveSpawner" type="Node2D" parent="."]
+script = ExtResource("6_ui384")
+scene = ExtResource("20_ysond")
+
+[connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]
+[connection signal="body_entered" from="HitboxComponent" to="." method="_on_hitbox_component_body_entered"]
+[connection signal="hit_hurtbox" from="HitboxComponent" to="." method="_on_hitbox_component_hit_hurtbox"]
