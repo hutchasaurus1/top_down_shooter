@@ -23,6 +23,5 @@ func destroy() -> void:
 	if is_instance_valid(item_spawn):
 		if item_spawn.get_indexed("scene") != null:
 			item_spawn.spawn(actor.global_position)
-	print_debug(self.process_mode)
 	if self.process_mode != 4:
 		actor.queue_free()

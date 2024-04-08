@@ -100,10 +100,8 @@ func destroy():
 	state = "destroy"
 	animation_player.play("angry")
 	for node in destruct_nodes:
-		print_debug(node.name)
 		destroyed_effect_spawner.spawn(node.global_position)
 	await get_tree().create_timer(.5).timeout
-	print_debug("here")
 	get_tree().change_scene_to_file.bind("res://Menus/stage_over.tscn").call_deferred()
 	
 
